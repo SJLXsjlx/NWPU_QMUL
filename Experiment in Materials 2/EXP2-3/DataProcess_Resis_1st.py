@@ -11,7 +11,7 @@ plt.rcParams['mathtext.fontset'] = 'stix'
 plt.rcParams['font.family'] = 'STIXGeneral'
 plt.rcParams['axes.unicode_minus'] = False 
 
-file_path = r"D:\.NWPU_QMUL\Experiments in Materials 2\EXP2-3\材料学实验数据 (version 2).xlsx"
+file_path = r"D:\.NWPU_QMUL\Experiments in Materials 2\EXP2-3\Team B.xlsx"
 df = pd.read_excel(file_path)
 
 # 数据清洗
