@@ -1,0 +1,237 @@
+%!TEX program = xelatex
+
+\documentclass[11pt,a4paper]{article}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{subcaption}          
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{tocloft} 
+\usepackage{parskip} 
+\usepackage{setspace} 
+\usepackage{tabularx} 
+
+% ==================== Hyperref 设置 ====================
+\usepackage[hidelinks]{hyperref}   
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black,
+    pdfborder={0 0 0}
+}
+% =======================================================
+
+\captionsetup[figure]{labelfont=bf, labelsep=period}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setstretch{1.15} 
+
+\begin{document}
+
+% ==================== 封面页 ====================
+\begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+    \vspace*{0.5cm}
+    
+    {\LARGE \textsc{Northwestern Polytechnical University}} \\[0.3cm]
+    {\Large \textsc{Queen Mary Engineering School}} \\[2.5cm]
+    
+    \rule{\textwidth}{1.5pt} \\[0.8cm]
+    
+    {\Huge \textbf{Design Report}} \\[0.4cm]
+    {\huge \textbf{of Folding Wing Mechanism}} \\[0.4cm]
+    {\huge \textbf{Based on Four-Bar Linkage}} \\[0.4cm]
+    {\huge \textbf{for Carrier-Based Aircraft}} \\[0.6cm]
+    
+    \rule{\textwidth}{1.5pt} \\[2.5cm]
+    
+    \begin{minipage}{0.7\textwidth}
+        \Large
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{@{}l l@{}}
+            \textbf{Group Number:} & M3 \\
+            \textbf{Team Leader:} & Zhiyuan Ying \\
+            \textbf{Group Members:} & Yi Feng, Yirui Li, Zhiyuan Ying \\
+                                    & Ke Xu, Zichong Xu, Jiayi Zhang \\
+        \end{tabular}
+    \end{minipage}
+    
+    \vfill
+    
+    {\Large \textbf{May 2026}} \\[1cm]
+
+\end{titlepage}
+
+% ==================== 摘要与目录 (罗马数字页码) ====================
+\newpage
+\pagenumbering{roman}
+\begin{abstract}
+Carrier-based aircraft operate in highly constrained environments where flight deck and hangar spaces are at an absolute premium. To maximize the operational capacity and sortie generation rates of aircraft carriers, reliable wing-folding mechanisms are strictly required. This project presents the comprehensive design and analysis of a planar four-bar linkage mechanism tailored for this specific task. Through iterative parameter optimization and Grashof criterion verification, the proposed mechanism successfully achieves a strict operational folding range of $0^\circ$--$135^\circ$ while adhering to critical spatial restrictions. Kinematics simulation and dynamic analysis are systematically conducted to evaluate the velocity and acceleration profiles, ensuring that the mechanism operates smoothly without generating excessive inertial forces that could compromise the hinge joints. Python programming is employed for trajectory and numerical simulation, whereas SolidWorks is utilized for robust 3D modeling and dynamic motion demonstration. The integrated results verify that the synthesized four-bar mechanism functions reliably, mitigating mechanical jamming and fully satisfying the deployment and stowage requirements of modern carrier-based aircraft.
+\end{abstract}
+
+\textbf{Keywords}: four-bar linkage; folding wing; kinematics analysis; parameter optimization; carrier-based aircraft
+
+\clearpage
+\tableofcontents
+\clearpage
+
+% ==================== 正文开始 (阿拉伯数字页码重新从1开始) ====================
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Introduction}
+
+The operational efficiency of a carrier-based aviation wing is fundamentally limited by the physical dimensions of the aircraft carrier. Unlike land-based aircraft, carrier-based platforms must coexist in a ``high-density" environment where the flight deck, elevators, and hangar bays are extremely congested. The ability to minimize the ``spot factor'' (the area an aircraft occupies on deck) is directly correlated to the number of aircraft that can be carried and the speed at which a strike package can be launched.
+
+Historically, wing-folding technology has evolved from simple manual hinges to complex hydraulic and electronic actuators. Among various mechanical solutions, the planar four-bar linkage remains a cornerstone of aerospace design due to its high load-bearing capacity, mechanical simplicity, and predictable kinematic behavior. This project focuses on the synthesis of such a mechanism, aiming to balance the requirements of a large folding angle ($135^\circ$) with the necessity for a compact structural footprint. By integrating numerical optimization with CAD validation, we aim to provide a robust solution that ensures smooth transitions and high structural integrity under the dynamic loads typical of maritime operations.
+
+\section{Problem Analysis}
+
+The design of a folding wing mechanism is not merely a geometric exercise but an engineering challenge involving multi-objective constraints:
+
+\begin{itemize}
+    \item \textbf{Kinematic Synthesis}: The mechanism must translate a small actuator input into a wide-range output ($0^\circ$ to $135^\circ$). This requires careful selection of link lengths to avoid ``dead points'' where the mechanism becomes locked or loses control.
+    \item \textbf{Transmission Angle ($\gamma$)}: For efficient power transmission from the actuator to the wing, the transmission angle must be maintained within an optimal range (typically $\gamma > 40^\circ$) throughout the motion to prevent jamming and excessive wear on bearings.
+    \item \textbf{Spatial Envelope}: The entire linkage must be embedded within the wing's profile (the airfoil thickness) during flight to maintain aerodynamic efficiency. This places severe limits on the maximum length and offset of the bars.
+    \item \textbf{Dynamic Reliability}: Carrier decks are subject to ``Sea State'' induced motions (pitch, roll, and heave). The folding mechanism must be stable enough to resist these external inertial forces without unintended movement or structural fatigue.
+\end{itemize}
+
+\section{Design Process}
+
+\subsection{Model Selection and Degrees of Freedom}
+
+After evaluating spatial vs. planar chains, we selected the Crank-Rocker configuration of the planar four-bar linkage. According to Grubler’s criterion, the mechanism possesses a single degree of freedom ($DOF = 1$), ensuring deterministic motion controlled by a single hydraulic actuator. This simplicity is vital for synchronization between the port and starboard wings.
+
+\subsection{Parameter Determination}
+
+To achieve the target folding angle while satisfying the Grashof Condition (ensuring the shortest link can rotate fully if needed)\cite{ref1}, we utilized a numerical optimization script. The objective function was set to minimize the peak acceleration at the coupler while maintaining the $135^\circ$ range. The final synthesized lengths are:
+\[
+L_1 (\text{Frame}) = 100.00\,\text{mm}, \quad L_2 (\text{Crank}) = 61.73\,\text{mm}, 
+\]
+\[
+L_3 (\text{Coupler}) = 138.27\,\text{mm}, \quad L_4 (\text{Rocker}) = 100.00\,\text{mm}.
+\]
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{fig1_length_angle.png}
+    \caption{Rod lengths and angular relationship envelope (Fig. 1)}
+    \label{fig:1}
+\end{figure}
+
+\subsection{Kinematics Simulation}
+
+Using Python's \texttt{NumPy} and \texttt{Matplotlib}, we solved the loop-closure equations:
+$$L_2 e^{i\theta_2} + L_3 e^{i\theta_3} = L_1 + L_4 e^{i\theta_4}$$
+By iterating through $\theta_2$ (the input angle), we mapped the trajectory of the wing-tip. The simulation confirmed that the mechanism remains within the prescribed spatial boundaries without any ``self-interference'' or link crossing.
+
+\subsection{3D Modeling and Mechanical Integration}
+
+The geometric results were imported into SolidWorks to create a high-fidelity 3D CAD model. Special attention was paid to the hinge design, ensuring that the pins and bushings could withstand the calculated shear forces. The model demonstrates that in the ``stowed'' position, the wing is rotated sufficiently to clear the overhead height limits of standard hangar decks.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{fourbar_mechanism.png}
+    \caption{Schematic representation of the optimized four-bar linkage mechanism ($L_1$ (Orange), $L_2$ (Blue), $L_3$ (Green), $L_4$ (Grey))}
+    \label{fig:mechanism}
+\end{figure}
+
+\section{Results and Analysis}
+
+The kinematic performance was evaluated at an input speed of $\omega = 2\,\text{rad/s}$. The following profiles focus on the midpoint of the coupler ($L_3$), which represents the center of mass for the folding section.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig2_velocity.png}
+        \caption{Linear velocity magnitude curve}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig2_angular_velocity.png}
+        \caption{Coupler angular velocity curve}
+    \end{subfigure}
+    \\
+    \vspace{0.3cm}
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{fig2_angular_acceleration.png}
+        \caption{Coupler angular acceleration curve}
+    \end{subfigure}
+    \caption{Kinematic profiles (velocity, angular velocity, and angular acceleration) at the midpoint of $L_3$}
+    \label{fig:2}
+\end{figure}
+
+Key Observations:
+
+\begin{itemize}
+    \item \textbf{Velocity Continuity:} The linear velocity curve (Fig. 3a) shows a smooth bell-shaped distribution, indicating the absence of sudden ``jerks'' during the start and end of the folding cycle.
+    \item \textbf{Acceleration Limits:} The angular acceleration (Fig. 3c) peaks stay within manageable limits. This is crucial because $F = ma$; lower acceleration translates to lower dynamic stresses on the mechanical pins, extending the service life of the aircraft wing.
+    \item \textbf{Stability:} No discontinuities were found in the velocity or acceleration derivatives, confirming that the mechanism does not pass through any singular configurations (dead points) during its $135^\circ$ travel.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{solidworks_model.png}
+    \caption{SolidWorks 3D CAD model and spatial demonstration of the folding motion}
+    \label{fig:3d}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{aircraft_examples.png}
+    \caption{Real-world comparative examples of folding-wing architectures on carrier-based aircraft}
+    \label{fig:aircraft}
+\end{figure}
+
+\section{Conclusion}
+
+This project successfully designed and verified a planar four-bar linkage mechanism for carrier-based aircraft wing folding.\cite{ref2} The optimized parameters ($L_1=100, L_2=61.73, L_3=138.27, L_4=100$) provide a reliable $135^\circ$ range of motion while maintaining a compact form factor. Through Python-based kinematic analysis and SolidWorks 3D modeling, we have demonstrated that the mechanism operates with smooth velocity transitions and controlled acceleration, minimizing the risk of mechanical failure. 
+
+The synthesis of this mechanism directly addresses the critical need for space optimization on aircraft carriers, potentially increasing the aircraft density of a carrier deck. Future work will involve structural optimization (Finite Element Analysis) to reduce the weight of the links while maintaining the required factor of safety against aerodynamic lift during the unfolding phase.
+
+\clearpage
+
+% 将“References”添加到目录，但不显示编号
+\addcontentsline{toc}{section}{References} 
+
+\begin{thebibliography}{9}
+\bibitem{ref1} Norton, R.~L. \emph{Design of Machinery: An Introduction to the Synthesis and Analysis of Mechanisms and Machines}. McGraw-Hill Education, 6th edition, 2020.
+\bibitem{ref2} Li, Y., et~al. ``Mechanism Design and Aerodynamic Research of Bat-like Retractable Folding Wing Mechanism.'' In \emph{Proceedings of the 2020 International Council of the Aeronautical Sciences (ICAS)}, 2020.
+\end{thebibliography}
+
+\clearpage
+
+\appendix
+\section{Team Division of Labor and Leader's Scoring Table}
+
+\textbf{Team Leader}: Zhiyuan Ying
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \caption{Team Division of Labor and Performance Evaluation}
+    \vspace{0.3cm}
+    \begin{tabularx}{\textwidth}{c l X c}
+        \toprule
+        \textbf{No.} & \textbf{Name} & \textbf{Specific Division of Labor} & \textbf{Score} \\
+        \midrule
+        1 & Zhiyuan Ying & Overall project coordination; SolidWorks 3D modeling and motion video recording; technical drafting and final integration. & 96 \\
+        2 & Yirui Li & Geometric synthesis and parameter determination; optimization of rod lengths for the $0^\circ$--$135^\circ$ target. & 95 \\
+        3 & Yi Feng & Python kinematics simulation architecture; development of motion trajectory visualization scripts. & 94 \\
+        4 & Ke Xu & Dynamic kinematics analysis; generation and interpretation of velocity and acceleration profiles. & 96 \\
+        5 & Zichong Xu & Problem engineering analysis and introduction drafting; aesthetic design of the report and technical posters. & 95 \\
+        6 & Jiayi Zhang & Quantitative results analysis and chart formatting; rigorous assistance with conclusion refinement and academic proofreading. & 95 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\textbf{Overall Evaluation}: The project was completed with a high degree of technical rigor. The team effectively used software tools to verify theoretical models, and the final design is both functional and structurally sound.
+
+\end{document}
