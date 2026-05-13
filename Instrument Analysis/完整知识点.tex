@@ -1,0 +1,403 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[UTF8,fontset=none]{ctex}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{fontspec}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{colortbl}
+
+% ====================== 字体设置 ======================
+\setmainfont{Calibri}
+\setCJKmainfont[BoldFont=Microsoft YaHei Bold]{Microsoft YaHei}
+\setCJKsansfont{Microsoft YaHei}
+\setCJKmonofont{SimSun}
+
+% ====================== 颜色定义：跨性别旗帜配色 ======================
+\definecolor{sectionColor}{RGB}{45, 150, 220}       % 深蓝色
+\definecolor{subsectionColor}{RGB}{255, 193, 206}   % 粉色（旗帜标准色）
+\definecolor{subsubsectionColor}{RGB}{91, 206, 250} % 浅蓝色（旗帜标准色）
+\definecolor{lightBlue}{RGB}{200, 230, 255}         % 浅蓝色背景
+\definecolor{lightPink}{RGB}{255, 240, 247}         % 浅粉色背景
+\definecolor{tableRowOdd}{RGB}{245, 248, 255}       % 表格奇数行
+\definecolor{tableRowEven}{RGB}{225, 242, 255}      % 表格偶数行
+
+\geometry{a4paper, margin=2cm, top=2.5cm, bottom=2cm}
+\setlength{\headheight}{12.5pt}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+% ====================== 标题间距优化 ======================
+\titleformat{\section}{\Large\bfseries\color{sectionColor}}{\thesection}{1em}{}{}
+\titlespacing*{\section}{0pt}{18pt}{12pt}
+\titleformat{\subsection}{\large\bfseries\color{subsectionColor}}{\thesubsection}{1em}{}{}
+\titlespacing*{\subsection}{0pt}{14pt}{8pt}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{subsubsectionColor}}{\thesubsubsection}{1em}{}{}
+\titlespacing*{\subsubsection}{0pt}{10pt}{6pt}
+
+% ====================== 列表和自定义命令 ======================
+\setlist[itemize]{leftmargin=2em, label=\color{subsubsectionColor}\textbullet}
+\newcommand{\core}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\keydef}[1]{\tcbox[on line, colback=lightPink!50,, colframe=subsectionColor!70, boxsep=2pt, arc=2pt]{\textbf{#1}}}
+
+% ====================== 页眉页脚 ======================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\small\textcolor{subsectionColor}{仪器分析复习讲义}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{\color{subsectionColor}\hrule height 0.5pt}
+
+\begin{document}
+
+\section{导论}
+
+\subsection{仪器发展三要素}
+理论基础、技术进步、实际问题需求
+
+\subsection{化学分析 vs 仪器分析核心对比}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{3.8cm} 
+                >{\raggedright\arraybackslash}p{3.2cm} 
+                >{\raggedright\arraybackslash}p{4.2cm}}
+\toprule
+\rowcolor{sectionColor!30}\textbf{维度} & \textbf{化学分析} & \textbf{仪器分析} \\
+\midrule
+\rowcolor{tableRowOdd}灵敏度 & mg/L 级 & μg/L 甚至 ng/L 级 \\
+\rowcolor{tableRowEven}样品量 & 0.2g / 数 mL & mg/μL 级 \\
+\rowcolor{tableRowOdd}相对误差 & $\sim$0.1\% & $\sim$5\% \\
+\rowcolor{tableRowEven}适用范围 & 常量组分 & 微量、痕量组分 \\
+\rowcolor{tableRowOdd}成本 & 低 & 高（仪器购置及维护） \\
+\bottomrule
+\end{tabular}
+\caption{化学分析与仪器分析主要区别对比}
+\end{table}
+
+\subsection{3S+2A 评价原则}
+Sensitivity（灵敏度）、Selectivity（选择性）、Speediness（速度）+ Accuracy（准确度）、Automatics（自动化）
+
+
+\newpage
+\section{色谱分析法}
+
+\subsection{色谱法基础}
+
+\subsubsection{定义与分类}
+\begin{itemize}
+    \item \core{核心原理}：利用混合物各组分在\textbf{固定相}和\textbf{流动相}之间的分配/吸附/离子交换/排阻等作用力差异实现分离。这是色谱法最根本的分离基础。
+    \item \core{按流动相状态分类}：
+    \begin{itemize}
+        \item 气相色谱（GC）
+        \item 液相色谱（LC）
+        \item 超临界流体色谱（SFC）
+    \end{itemize}
+    \item \core{按分离机制分类}：
+    \begin{itemize}
+        \item 分配色谱
+        \item 吸附色谱
+        \item 离子交换色谱
+        \item 凝胶渗透色谱（尺寸排阻色谱）
+        \item 亲和色谱
+    \end{itemize}
+    \item \core{按固定相形态分类}：
+    \begin{itemize}
+        \item 柱色谱
+        \item 薄层色谱（TLC）
+        \item 纸色谱
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{核心参数}
+\begin{itemize}
+    \item \textbf{保留时间} \( t_R \)：组分从进样到出现峰最大值的时间，直接反映组分在色谱柱中的滞留情况。
+    \item \textbf{死时间} \( t_0 \)：不被固定相保留的组分（通常是空气或溶剂峰）的保留时间，也称为死体积对应的时间。
+    \item \textbf{调整保留时间} \keydef{\(t'_R = t_R - t_0\)}：扣除死时间后的保留时间，真正体现组分与固定相的相互作用。
+    \item \textbf{相对保留值} \( \alpha = \frac{t'_{R2}}{t'_{R1}} \)（\( \alpha > 1 \)）：两组分调整保留时间之比，仅与固定相和温度有关，是色谱定性的重要参数，与柱效无关。
+    \item \textbf{分配系数} \keydef{\(K = \frac{c_s}{c_m}\)}：组分在固定相和流动相中的浓度比，是热力学平衡常数。
+    \item \textbf{容量因子} \keydef{\(k = K \cdot \frac{V_s}{V_m} = \frac{t'_R}{t_0}\)}：组分在固定相和流动相中的质量比，反映保留强弱。\( k \) 值越大，保留越强。
+\end{itemize}
+
+\subsubsection{分离理论}
+\begin{itemize}
+    \item \core{塔板理论}：将色谱柱比作精馏塔，引入理论塔板数 \( n \) 和理论塔板高度 \( H \) 来衡量柱效（分离效率）。
+    \[
+    \boxed{n = 16 \left( \frac{t_R}{W} \right)^2 = 5.54 \left( \frac{t_R}{W_{1/2}} \right)^2, \quad H = \frac{L}{n}}
+    \]
+    其中 \( W \) 为峰底宽度，\( W_{1/2} \) 为半高峰宽。
+    \[
+    n_{\text{eff}} = 16 \left( \frac{t'_R}{W} \right)^2
+    \]
+    （有效塔板数，更准确反映实际柱效，扣除了死时间的影响）。
+    \item \core{速率理论（范第姆特方程）}：更全面地解释柱效与流速的关系：
+    \[
+    \boxed{H = A + \frac{B}{u} + C u}
+    \]
+    \begin{itemize}
+        \item \( A \)：涡流扩散项，与固定相颗粒大小和填充均匀度有关。颗粒越小、填充越均匀，\( A \) 越小。
+        \item \( \frac{B}{u} \)：分子扩散项，与组分在流动相中的扩散系数成正比，与流速 \( u \) 成反比。
+        \item \( C u \)：传质阻力项，与流速成正比，与固定相颗粒大小和液膜厚度成反比。
+    \end{itemize}
+    \textbf{最佳流速}：\( u_{\text{opt}} = \sqrt{\frac{B}{C}} \)，此时 \( H \) 最小，柱效最高。
+\end{itemize}
+
+\subsubsection{\texorpdfstring{分离度 \( R \)}{分离度 R}}
+\begin{itemize}
+    \item \textbf{定义}：
+    \[
+    R = \frac{2(t_{R2} - t_{R1})}{W_1 + W_2}
+    \]
+    \item \textbf{评价标准}：
+    \begin{itemize}
+        \item \( R \geq 1.5 \)：完全分离（基线分离）
+        \item \( R = 1.0 \)：98\%分离
+        \item \( R < 1.0 \)：分离不完全
+    \end{itemize}
+    \item \textbf{影响因素}：柱效（\( n \)）、选择性（\( \alpha \)）、容量因子（\( k \)）
+    \[
+    \boxed{R = \frac{\sqrt{n}}{4} \cdot \frac{\alpha - 1}{\alpha} \cdot \frac{k}{1 + k}}
+    \]
+    公式清晰显示：提高 \( n \)、增大 \( \alpha \)、适当增大 \( k \) 均可改善分离度。
+\end{itemize}
+
+\subsection{气相色谱法（GC）}
+
+\subsubsection{仪器组成}
+载气系统、进样系统、色谱柱、检测器、记录系统（五大基本组成部分）。
+
+\subsubsection{色谱柱}
+\begin{itemize}
+    \item \textbf{填充柱}：内径2--4\,mm，长1--5\,m，内部填充固定相，柱效较低但容量大。
+    \item \textbf{毛细管柱}：内径0.1--0.5\,mm，长10--100\,m，内壁涂固定液（或键合），\textbf{柱效极高}，是目前主流。
+\end{itemize}
+
+\subsubsection{固定相选择}
+\textbf{相似相溶原则}（“相似者相溶”）：
+\begin{itemize}
+    \item 非极性组分选用非极性固定液（如SE-30、OV-101），按沸点顺序出峰。
+    \item 极性组分选用极性固定液（如PEG-20M、OV-17），按极性顺序出峰。
+\end{itemize}
+
+\subsubsection{常用检测器}
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.2cm} 
+                >{\raggedright\arraybackslash}p{2.9cm} 
+                >{\raggedright\arraybackslash}p{2.5cm} 
+                >{\raggedright\arraybackslash}p{3.5cm} 
+                >{\raggedright\arraybackslash}p{3.0cm}}
+\toprule
+\rowcolor{sectionColor!30}\textbf{检测器} & \textbf{类型} & \textbf{检测限} & \textbf{适用范围} & \textbf{核心特点} \\
+\midrule
+\rowcolor{tableRowOdd}热导检测器 (TCD) & 浓度型、通用型 & $10^{-6}\sim10^{-7}$\,g & 所有物质（无机、有机均可） & 不破坏样品，灵敏度较低，线性范围窄 \\
+\rowcolor{tableRowEven}氢火焰离子化检测器 (FID) & 质量型、准通用型 & $10^{-12}$\,g/s & 含碳有机物（对H、He、N$_2$、O$_2$、Ar等无响应） & 灵敏度高（$10^{-10}\sim10^{-13}$\,g），线性范围宽（$10^{7}$），最常用 \\
+\rowcolor{tableRowOdd}电子捕获检测器 (ECD) & 浓度型、选择性 & $10^{-14}$\,g/mL & 含卤素、硝基等电负性物质 & 灵敏度极高，选择性好，适用于农药残留分析 \\
+\rowcolor{tableRowEven}火焰光度检测器 (FPD) & 质量型、选择性 & $10^{-11}\sim10^{-12}$\,g & 含硫、磷化合物 & 对S、P有极高选择性，特征波长发光检测 \\
+\bottomrule
+\end{tabular}
+\caption{GC常用检测器详细对比表}
+\end{table}
+
+\subsubsection{操作条件优化}
+柱温、载气流速、进样量、气化温度。
+\begin{itemize}
+    \item \textbf{柱温}：一般低于组分沸点50--100$^\circ$C；宽沸程样品采用程序升温（初始低温保留易挥发组分，后升温分离高沸点组分）。
+\end{itemize}
+
+\subsection{高效液相色谱法（HPLC）}
+
+\subsubsection{仪器组成}
+高压输液泵（提供高压）、进样器、色谱柱、检测器、记录系统。
+
+\subsubsection{主要类型及应用}
+\begin{itemize}
+    \item \textbf{反相色谱（RP-HPLC）}：固定相非极性（如C18、C8、苯基柱），流动相极性（水-甲醇/乙腈体系），分离非极性至中等极性化合物，\textbf{目前应用最广泛}（占HPLC 80\%以上）。
+    \item \textbf{正相色谱（NP-HPLC）}：固定相极性（如硅胶、氨基柱），流动相非极性，分离极性化合物。
+    \item \textbf{离子交换色谱（IEC）}：基于离子交换原理，分离离子型化合物。
+    \item \textbf{凝胶渗透色谱（GPC）/凝胶过滤色谱（GFC）}：按分子大小（尺寸排阻）分离，主要用于高分子化合物分子量测定和分布分析。
+\end{itemize}
+
+\subsubsection{常用检测器}
+紫外检测器（UV）、二极管阵列检测器（DAD，可获得全波长光谱）、荧光检测器（FLD，高灵敏度）、示差折光检测器（RID，通用型但灵敏度低）、蒸发光散射检测器（ELSD，适用于无紫外吸收物质）。
+
+\subsection{色谱定性与定量分析}
+
+\subsubsection{定性分析}
+保留值定性（\( t_R \)、\( \alpha \)）、与标准品对照、联用技术（GC-MS、LC-MS）。
+
+\subsubsection{定量分析}
+\begin{itemize}
+    \item \textbf{归一化法}：要求所有组分都出峰且有响应信号。
+    \[
+    \boxed{w_i = \frac{A_i f_i}{\sum A_i f_i} \times 100\%}
+    \]
+    其中 \( f_i \) 为校正因子。
+    \item \textbf{外标法}：用标准品制作标准曲线，操作简单，但进样量必须准确。
+    \item \keydef{\textbf{内标法}}：加入已知量内标物，消除进样量和操作条件波动影响，\textbf{准确度最高}。
+    \item \textbf{内标物选择原则}：样品中不存在、与待测组分性质相近、完全分离、出峰位置合适（既不重叠也不太远）。
+\end{itemize}
+
+\newpage
+\section{光谱分析法}
+
+\subsection{光谱法基础}
+
+\subsubsection{电磁辐射与光谱区}
+\begin{itemize}
+    \item 电磁辐射具有波粒二象性：
+    \[
+    \boxed{E = h\nu = \frac{hc}{\lambda}}
+    \]
+    \item 光谱区划分（按波长由短到长）：\(\gamma\)射线、X射线、紫外、可见、红外、微波、无线电波。
+\end{itemize}
+
+\subsubsection{光谱法分类}
+\begin{itemize}
+    \item 按辐射与物质相互作用方式：吸收光谱、发射光谱、散射光谱。
+    \item 按被测粒子类型：原子光谱、分子光谱。
+\end{itemize}
+
+\subsubsection{朗伯-比尔定律}
+物质对单色光吸收的定量关系（定量分析核心）：
+\[
+\boxed{A = -\lg T = \lg \left( \frac{I_0}{I} \right) = \varepsilon b c}
+\]
+\begin{itemize}
+    \item \( A \)：吸光度；\( T \)：透光率；\( \varepsilon \)：摩尔吸光系数；\( b \)：光程长度；\( c \)：物质的量浓度。
+    \item \core{适用条件}：入射光为单色光、稀溶液（\( A < 0.8 \) 最佳）、吸光粒子间无相互作用。
+\end{itemize}
+
+\subsection{紫外-可见分光光度法（UV-Vis）}
+
+\subsubsection{原理}
+分子中价电子跃迁产生的吸收光谱，波长范围200--800\,nm（紫外+可见）。
+
+\subsubsection{电子跃迁类型}
+\(\sigma \to \sigma^*\)、\(n \to \sigma^*\)、\(\pi \to \pi^*\)、\(n \to \pi^*\)。
+\begin{itemize}
+    \item \(\pi \to \pi^*\) 和 \(n \to \pi^*\) 跃迁在紫外-可见区有强吸收，是主要研究对象。
+\end{itemize}
+
+\subsubsection{生色团与助色团}
+\begin{itemize}
+    \item \textbf{生色团}：含有\(\pi\)键的不饱和基团（如C=C、C=O、苯环），能独立产生紫外-可见吸收。
+    \item \textbf{助色团}：本身无吸收，但与生色团相连时可使吸收峰红移（向长波方向移动）并增强吸收强度（如-OH、-NH$_2$、-Cl等）。
+\end{itemize}
+
+\subsubsection{仪器组成}
+光源、单色器、吸收池（石英或玻璃）、检测器、记录系统。
+
+\subsubsection{应用}
+定量分析（标准曲线法）、定性分析、结构分析、纯度检查。
+
+\subsection{红外光谱法（IR）}
+
+\subsubsection{原理}
+分子振动能级跃迁产生的吸收光谱，波长范围2.5--25\,\(\mu\)m（对应波数4000--400\,cm\(^{-1}\)）。
+
+\subsubsection{分子振动类型}
+伸缩振动（\(\nu\)）、弯曲振动（\(\delta\)）（包括面内、面外）。
+
+\subsubsection{红外活性}
+只有发生偶极矩变化的振动才能产生红外吸收（对称分子中某些振动可能无红外活性）。
+
+\subsubsection{特征吸收峰}
+见打印的红外光谱图，常见官能团的特征峰位置和形状是定性分析的关键。
+
+\subsubsection{应用}
+有机化合物结构鉴定、官能团分析、定性定量分析。
+
+\subsection{原子吸收光谱法（AAS）}
+
+\subsubsection{原理}
+基态原子吸收特定波长的光，跃迁到激发态，产生原子吸收光谱（元素选择性极强）。
+
+\subsubsection{仪器组成}
+光源（空心阴极灯，每元素一灯）、原子化器、单色器、检测器。
+
+\subsubsection{原子化器}
+\begin{itemize}
+    \item 火焰原子化器（火焰温度较低）
+    \item 石墨炉原子化器（电热，灵敏度更高，可达$10^{-12}$ g级）
+\end{itemize}
+
+\subsubsection{特点}
+灵敏度高、选择性好、准确度高、适用于痕量金属元素定量分析。
+
+\subsubsection{定量方法}
+标准曲线法、标准加入法（适用于复杂基体）。
+
+\subsection{核磁共振波谱法（NMR）}
+
+\subsubsection{原理}
+原子核在强磁场中吸收射频辐射，发生自旋能级跃迁（磁共振现象）。
+
+\subsubsection{常用核}
+\(^1\)H（质子核磁）、\(^{13}\)C（碳核磁）。
+
+\subsubsection{重要参数}
+\begin{itemize}
+    \item \textbf{化学位移}（\(\delta\)）：由于核外电子屏蔽效应，不同化学环境的核共振频率不同，以TMS（四甲基硅烷）为内标（\(\delta = 0\)）。
+    \item \textbf{自旋-自旋耦合}：相邻核自旋相互作用导致谱线分裂，分裂数符合 \keydef{\(n+1\) 规则}（\( n \) 为相邻等价质子数）。
+    \item \textbf{耦合常数}（\( J \)，单位Hz）：反映核之间相互作用的强弱，与磁场强度无关。
+    \item \textbf{积分面积}：与质子数成正比，直接用于定量分析。
+\end{itemize}
+
+\subsubsection{应用}
+有机化合物结构解析，确定分子中氢原子和碳原子的化学环境、连接方式及立体结构。
+
+\subsection{质谱法（MS）}
+
+\subsubsection{原理}
+将样品分子电离成离子，按质荷比（\( m/z \)）分离并检测。
+
+\subsubsection{仪器组成}
+进样系统、离子源、质量分析器、检测器。
+
+\subsubsection{离子源}
+电子轰击源（EI，硬电离，碎片多）、化学电离源（CI，软电离）、电喷雾电离源（ESI，适合大分子）、基质辅助激光解吸电离源（MALDI）。
+
+\subsubsection{质谱图}
+横坐标为质荷比（\( m/z \)），纵坐标为离子相对丰度。分子离子峰 \( M^+ \) 对应分子量。
+
+\subsubsection{应用}
+测定分子量、确定分子式、结构解析、定性定量分析。
+
+\newpage
+\section{综合对比与考点提示}
+
+\subsection{色谱与光谱的区别}
+\begin{itemize}
+    \item \textbf{色谱}：本质是分离技术，主要用于混合物分离和定量分析，定性能力相对较弱。
+    \item \textbf{光谱}：本质是鉴定技术，主要用于结构分析和定性，定量能力强（尤其是UV-Vis、AAS）。
+    \item \textbf{联用技术}（GC-MS、LC-MS）：将色谱的分离能力和光谱的鉴定能力完美结合，是现代分析化学的主流方法。
+\end{itemize}
+
+\subsection{高频考点}
+\begin{itemize}
+    \item \textbf{色谱部分}：保留值计算、塔板理论与速率理论（范第姆特方程）、分离度公式及其影响因素、气相与液相色谱的仪器组成及检测器特点、各种定量方法优缺点。
+    \item \textbf{光谱部分}：朗伯-比尔定律及其适用条件、紫外-可见吸收的电子跃迁类型、生色团与助色团、红外特征吸收峰的识别、核磁共振化学位移的影响因素和耦合裂分规律（\( n+1 \)规则）、质谱分子离子峰判断。
+\end{itemize}
+
+\subsection{易错点}
+\begin{itemize}
+    \item 理论塔板数 \( n \) 与有效塔板数 \( n_{\text{eff}} \) 的区别（是否扣除死时间）。
+    \item 范第姆特方程中 \( A \)、\( B/u \)、\( C u \) 三项的物理意义及影响因素（颗粒大小、流速、扩散系数等）。
+    \item 红外光谱中相似官能团的特征峰区分（例如O-H与N-H的峰形差异、C=O的位置变化）。
+    \item 核磁共振中化学位移的影响因素（电负性、氢键、溶剂）和耦合裂分规律（\( n+1 \)规则的应用条件）。
+\end{itemize}
+
+\end{document}
