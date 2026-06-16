@@ -1,0 +1,724 @@
+% ============================================================
+% QXU4006 Materials Science 2 -- Comprehensive Review Notes
+% ENGINE: XeLaTeX / LuaLaTeX
+% Refined Academic Minimalist Design
+% ============================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---- Fonts & Encoding ----
+\usepackage{amsmath,amssymb}
+\usepackage{mathpazo} % Palatino font for elegant academic look
+\usepackage{inconsolata} % Clean monospace
+\usepackage[margin=1.5cm]{geometry} % Better margins for breathing room
+
+% ---- Colors ----
+\usepackage[dvipsnames]{xcolor}
+\definecolor{PrimaryDark}   {HTML}{1A365D}   % Deep elegant navy
+\definecolor{SecondaryDark} {HTML}{2B6CB0}   % Muted blue
+\definecolor{DarkRed}       {HTML}{9B2C2C}   % Academic crimson
+\definecolor{DarkOrange}    {HTML}{C05621}   % Rust orange
+\definecolor{DarkGreen}     {HTML}{276749}   % Forest green
+\definecolor{DarkPurple}    {HTML}{553C9A}   % Deep purple
+\definecolor{DarkGray}      {HTML}{4A5568}   % Slate gray
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=PrimaryDark, urlcolor=PrimaryDark, citecolor=DarkGreen}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs} % Academic standard for tables
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{titlesec}
+
+% ---- PAGE STYLE ----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\color{DarkGray}\textbf{Materials Science 2 -- QXU4006 Review Notes}}
+\fancyhead[R]{\footnotesize\color{DarkGray}\thepage~/~\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{gray!40}\hrule}
+\fancyfoot{}
+
+% ---- SECTION HEADINGS (Clean & Professional) ----
+\titleformat{\section}{\Large\bfseries\color{PrimaryDark}}{\thesection}{0em}{}[\vspace{-0.3em}\rule{\textwidth}{0.8pt}]
+\titleformat{\subsection}{\large\bfseries\color{SecondaryDark}}{\thesubsection}{0em}{}
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{2.5ex plus 1ex minus .2ex}{1ex plus .2ex}
+
+\newcommand{\mysec}[1]{\section*{#1}}
+\newcommand{\mysubsec}[1]{\subsection*{#1}}
+
+% ---- TCOLORBOX STYLES (Lightweight & Modern) ----
+\tcbset{
+  cleanbox/.style 2 args={
+    enhanced, breakable, boxrule=0pt, frame hidden,
+    borderline west={3pt}{0pt}{#1},
+    colback=#1!3!white, % Very faint background
+    coltitle=#1,
+    fonttitle=\bfseries\large,
+    title={#2},
+    left=10pt, right=10pt, top=8pt, bottom=8pt,
+    before skip=12pt, after skip=12pt
+  }
+}
+
+\newtcolorbox{critbox}[1]{cleanbox={DarkRed}{#1}}
+\newtcolorbox{impbox}[1]{cleanbox={DarkOrange}{#1}}
+\newtcolorbox{keybox}[1]{cleanbox={SecondaryDark}{#1}}
+\newtcolorbox{formbox}[1]{cleanbox={DarkGreen}{#1}}
+\newtcolorbox{membox}[1]{cleanbox={DarkPurple}{#1}}
+\newtcolorbox{notebox}[1]{cleanbox={DarkGray}{#1}}
+
+% ---- INLINE TEXT MARKERS ----
+\newcommand{\CRIT}[1]{\textcolor{DarkRed}{\textbf{#1}}}
+\newcommand{\IMP}[1]{\textcolor{DarkOrange}{\textbf{#1}}}
+\newcommand{\KEY}[1]{\textcolor{SecondaryDark}{\textbf{#1}}}
+\newcommand{\FML}[1]{\textcolor{DarkGreen}{\textbf{#1}}}
+\newcommand{\EXA}[1]{\textcolor{DarkGray}{\textit{#1}}}
+\newcommand{\HI}[1]{\colorbox{yellow!20}{\textcolor{DarkPurple}{\textbf{#1}}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt}
+
+% ============================================================
+\begin{document}
+
+% ---- TITLE BANNER ----
+\vspace*{1em}
+\begin{center}
+  {\LARGE\bfseries\color{PrimaryDark} Materials Science 2 -- QXU4006}\\[0.8em]
+  {\Large\color{DarkGray}\textit{Comprehensive Review Notes}}\\[0.8em]
+  \rule{\textwidth}{0.8pt}
+\end{center}
+
+% ---- LEGEND BAR ----
+\begin{center}
+  \footnotesize
+  \CRIT{CRITICAL 5/5} \quad \IMP{IMPORTANT 4/5} \quad \KEY{KEY DEFINITION} \quad \FML{FORMULA} \quad \HI{MUST MEMORIZE}
+\end{center}
+\vspace{1em}
+
+% ============================================================
+\mysec{1. Fe--C Phase Diagram --- THE MOST IMPORTANT DIAGRAM}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- You MUST be able to sketch, label, and interpret this diagram}
+Every steel heat treatment and cast iron property derives from this diagram.
+\end{critbox}
+
+\mysubsec{1.1 Key Phases in Fe--Fe\textsubscript{3}C System}
+
+\begingroup
+\renewcommand{\arraystretch}{1.35}
+\noindent
+\begin{tabular}{llll}
+\toprule
+\textbf{Phase} & \textbf{Crystal} & \textbf{Key Properties} & \textbf{C Solubility} \\
+\midrule
+$\delta$-ferrite   & BCC  & High-T only ($>$1394\textdegree C)              & Very low \\
+$\gamma$-austenite & FCC  & \CRIT{Non-magnetic}, soft, ductile              & $\sim$2.14 wt\% (1148\textdegree C) \\
+$\alpha$-ferrite   & BCC  & \CRIT{Magnetic}, soft, ductile                  & 0.022 wt\% (727\textdegree C) \\
+Fe\textsubscript{3}C (cementite) & Orthorhombic & \CRIT{Hard, brittle ceramic}       & 6.7 wt\% C \\
+\textbf{Pearlite}  & Lamellar $\alpha$+Fe\textsubscript{3}C & Soft $\alpha$ + hard Fe\textsubscript{3}C alternating & 0.76 wt\% C \\
+\bottomrule
+\end{tabular}
+\endgroup
+
+\mysubsec{1.2 The Two Invariant Reactions}
+
+\begin{critbox}{CRITICAL DISTINCTION -- Must Memorize Both Reactions!}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{p{2.8cm} p{5cm} p{5cm}}
+\toprule
+\textbf{Feature} & \textbf{Eutectic} & \textbf{Eutectoid} \\
+\midrule
+Reaction   & $\mathrm{L} \rightleftharpoons \gamma + \mathrm{Fe_3C}$ & $\gamma \rightleftharpoons \alpha + \mathrm{Fe_3C}$ \\
+Phase Type & \CRIT{Liquid $\to$ Two Solids} & \CRIT{Solid $\to$ Two Solids} \\
+Temperature& \CRIT{1148\textdegree C} & \CRIT{727\textdegree C} \\
+Composition& \CRIT{4.30 wt\% C}   & \CRIT{0.76 wt\% C} \\
+Product    & Relatively coarse              & Finer, more uniform \\
+Application& Cast iron solidification      & \CRIT{Steel heat treatment basis} \\
+\bottomrule
+\end{tabular}
+\end{critbox}
+
+\mysubsec{1.3 Steel Classification by Carbon Content}
+
+\begin{impbox}{CRITICAL TREND -- As carbon content increases}
+\centering\large
+Strength $\uparrow$, Hardness $\uparrow$ \hspace{1.5cm} \CRIT{Ductility $\downarrow$, Toughness $\downarrow$, Weldability $\downarrow$}
+\end{impbox}
+
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Low Carbon ($<$0.25 wt\% C):} $\alpha$-ferrite + pearlite. Do NOT respond to heat treatment. Strengthened by cold working. $\sigma_y$=275 MPa. \EXA{Car body panels, bridges, pipes.}
+
+    \item \KEY{Medium Carbon (0.25--0.6 wt\% C):} Can be heat-treated $\to$ martensite. $\sigma_y$ up to 1860 MPa (alloyed with Ni, Cr, Mo). \EXA{Bolts, shafts, gears, springs.}
+
+    \item \KEY{High Carbon (0.6--1.4 wt\% C):} Tool steels alloyed with Cr,V,W,Mo $\to$ hard carbides. \EXA{Drills, saws, dies, cutting blades.}
+
+    \item \KEY{Stainless ($>$11 wt\% Cr):} Passive Cr\textsubscript{2}O\textsubscript{3} layer $\to$ corrosion resistance. Ferritic (\CRIT{magnetic}) vs.\ Austenitic (\CRIT{non-magnetic}). \EXA{Chemical and food processing, valves.}
+\end{itemize}
+
+\mysubsec{1.4 Martensitic Transformation}
+
+\begin{impbox}{Diffusionless Transformation}
+\KEY{$\gamma$ (FCC) $\to$ Martensite (BCT)} when rapidly cooled (quenched). Carbon atoms trapped in interstitial positions $\to$ \CRIT{very few slip planes $\to$ EXTREMELY HARD but BRITTLE}.
+
+\medskip
+\KEY{Tempering:} Reheat martensite to intermediate temperature $\to$ \CRIT{TEMPERED MARTENSITE} (optimal combination of strength + toughness).
+\end{impbox}
+
+\mysubsec{1.5 Cast Irons (2.1--4.5 wt\% C) -- 5 Types}
+
+\begin{impbox}{Key Principle -- Form of Carbon Determines Properties}
+Cast irons have \CRIT{low melting points (1150--1300\textdegree C) $\to$ excellent castability}. The key microstructural variable is the \CRIT{form of carbon: graphite vs.\ cementite}. Graphite formation promoted by \HI{Si $>$ 1 wt\%} and \HI{slow cooling}.
+\end{impbox}
+
+\begingroup
+\renewcommand{\arraystretch}{1.3}
+\noindent
+\begin{tabular}{p{2.2cm} p{2.8cm} p{5.2cm} p{3.5cm}}
+\toprule
+\textbf{Type} & \textbf{Graphite} & \textbf{Key Properties} & \textbf{Applications} \\
+\midrule
+\CRIT{Gray}      & \textbf{FLAKES}   & Weak in tension (flakes = stress concentrators); excellent vibration dampening; wear resistant & Engine blocks, heavy machinery \\
+\CRIT{Ductile}   & \textbf{SPHERES}  & Add Mg/Ce; $\sigma_y$=276--483 MPa; EL up to 18\% (ferrite matrix); pearlite matrix = higher strength & Valves, pumps, crankshafts, gears \\
+White            & \textbf{CEMENTITE}& Low Si ($<$1 wt\%) + fast cooling; very hard, brittle; fracture appears white & Rollers for materials processing \\
+Malleable        & \textbf{ROSETTES} & Heat-treated white iron at 800--900\textdegree C; $\sigma_{UTS}$=345--448 MPa; reasonably ductile & Automotive casings, flanges, pipe fittings \\
+CGI              & \textbf{WORM-LIKE}& Improved thermal conductivity; thermal shock resistant; lower oxidation at elevated T & Diesel engines, high-speed train brake discs \\
+\bottomrule
+\end{tabular}
+\endgroup
+
+\newpage
+% ============================================================
+\mysec{2. Cold Working vs.\ Hot Working --- THE CRITICAL TOPIC}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- The ONLY Criterion}
+The \textbf{ONLY} criterion distinguishing cold working and hot working is the \CRIT{RECRYSTALLISATION TEMPERATURE ($\mathbf{T_{rec}}$)}, \textbf{NOT room temperature!}
+\end{critbox}
+
+\begin{formbox}{Recrystallisation Temperature Formula}
+\centering\Large
+\CRIT{$T_{rec} \approx 0.4 \times T_m$ \hspace{0.5cm} ($T_m$ in KELVIN!)}
+
+\vspace{6pt}
+\normalsize\raggedright
+\KEY{$T_{rec}$ is NOT a fixed value:} Higher purity $\to$ lower $T_{rec}$; Greater prior deformation $\to$ lower $T_{rec}$.
+
+\EXA{Examples:} Pure Fe $T_{rec}\approx 450$\textdegree C $\to$ carbon steel hot-worked at 800--1200\textdegree C.\\
+Pb and Sn: $T_{rec}$ BELOW room temperature $\to$ working them at RT IS hot working!
+\end{formbox}
+
+\mysubsec{2.1 Cold Working (Below $\mathbf{T_{rec}}$)}
+
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{Only work hardening} occurs -- NO dynamic recrystallisation or recovery during deformation
+    \item Grains become elongated and fragmented; \CRIT{dislocation density increases dramatically}
+    \item \textbf{Property changes:} \CRIT{Strength $\uparrow$, Hardness $\uparrow$, Ductility $\downarrow$, Toughness $\downarrow$}; residual stresses develop
+    \item \textbf{Advantages:} Excellent dimensional accuracy and surface finish; near-net-shape forming; strength without alloying
+    \item \textbf{Disadvantages:} High deformation resistance; limited deformation per pass; may need intermediate recrystallisation annealing
+    \item \EXA{Typical processes:} Cold rolling, cold drawing, cold forging/heading, cold extrusion, deep drawing, stamping, thread rolling
+\end{itemize}
+
+\mysubsec{2.2 Hot Working (Above $\mathbf{T_{rec}}$)}
+
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{Work hardening + dynamic recrystallisation/recovery occur SIMULTANEOUSLY} -- hardening completely offset by dynamic softening
+    \item Breaks up coarse as-cast grains; eliminates internal porosity and shrinkage cavities
+    \item \IMP{Improves material density and microstructural uniformity} $\to$ optimises mechanical properties
+    \item \textbf{Advantages:} Large deformation possible in single pass; simultaneously improves internal structure; lower energy
+    \item \textbf{Disadvantages:} Oxidation and decarburisation at high T; poor dimensional accuracy and surface quality
+    \item \EXA{Typical processes:} Hot rolling, hot forging, hot extrusion, hot piercing + rolling (seamless tubes)
+\end{itemize}
+
+\mysubsec{2.3 Annealing Stages After Cold Working}
+
+\begin{enumerate}[leftmargin=*,nosep]
+    \item \KEY{Recovery ($\sim$100--200\textdegree C):} Dislocation density reduced by annihilation and rearrangement; little change in strength
+    \item \CRIT{Recrystallisation ($\sim$200--500\textdegree C):} \textbf{New strain-free grains nucleate and grow -- dramatic drop in strength, increase in ductility!}
+    \item \KEY{Grain Growth ($>$500\textdegree C):} Larger grains consume smaller ones; further reduction in strength
+\end{enumerate}
+
+\newpage
+% ============================================================
+\mysec{3. Non-Ferrous Metals -- Quick Reference}
+
+\mysubsec{3.1 Why Not Use Steel for Everything?}
+Disadvantages of steel: \CRIT{High density (7850 kg/m\textsuperscript{3}), low thermal conductivity ($\sim$52 W/m·K), poor corrosion resistance (continuous oxidation).}
+
+\mysubsec{3.2 Aluminium Alloys}
+\begin{itemize}[leftmargin=*,nosep]
+    \item Density 2700 kg/m\textsuperscript{3} (1/3 of steel); E=70 GPa; FCC $\to$ ductile to low T; T\textsubscript{m}=660\textdegree C
+    \item \HI{High specific strength = strength/density}; good corrosion resistance (passive Al\textsubscript{2}O\textsubscript{3})
+    \item \textbf{Series:} 2xxx (Cu, heat-treatable); \CRIT{7xxx (Zn, highest strength -- 7075-T6: $\sigma_y$=505 MPa)}
+    \item \EXA{Aircraft structures, automotive frames, food packaging, heat exchangers}
+\end{itemize}
+
+\mysubsec{3.3 Titanium Alloys}
+\begin{itemize}[leftmargin=*,nosep]
+    \item Density 4500 kg/m\textsuperscript{3}; E=110 GPa; T\textsubscript{m}=1668\textdegree C
+    \item \HI{EXCELLENT specific strength}; outstanding corrosion resistance; \CRIT{biocompatible $\to$ medical implants}
+    \item Ti--6Al--4V ($\alpha$-$\beta$): $\sigma_{UTS}$=947 MPa, $\sigma_y$=877 MPa, EL=14\%
+    \item $\beta$-stabilised (e.g., Ti--10V--2Fe--3Al): $\sigma_{UTS}$ up to 1223 MPa
+    \item \EXA{Aircraft structures, jet engines, spacecraft, hip joints, dental implants}
+\end{itemize}
+
+\mysubsec{3.4 Copper Alloys}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \textbf{Pure Cu:} $\rho$=1.7$\times$10\textsuperscript{--8} $\Omega$·m, $k$=400 W/m·K; easily deformed. \EXA{Electrical wiring, heat exchangers}
+    \item \textbf{Brass (Cu--Zn):} $\alpha$ (FCC, ductile, cold-workable); $\beta'$ (BCC, harder); $\alpha$+$\beta'$ alloys need hot working
+    \item \textbf{Bronze (Cu--Sn):} Stronger than brass; excellent seawater corrosion; good fatigue. \EXA{Marine propellers, bearings}
+    \item \textbf{Beryllium Copper:} Precipitation hardened $\to$ $\sigma_{UTS}$ up to 1400 MPa; \CRIT{Be dust TOXIC}
+\end{itemize}
+
+\mysubsec{3.5 Nickel Superalloys}
+\begin{itemize}[leftmargin=*,nosep]
+    \item Strengthened by $\gamma'$ phase (Ni\textsubscript{3}Al/Ni\textsubscript{3}Ti) as $\sim$50 nm coherent particles
+    \item \CRIT{RESISTANT TO CREEP at T $>$ 850\textdegree C $\to$ turbine blades in jet engines}
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{4. Metal Processing -- Quick Reference}
+
+\mysubsec{4.1 Forming Operations}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Forging:} Hammering/stamping (often hot); open die vs.\ closed die
+    \item \KEY{Rolling:} Pressing between rollers; \% reduction = (A\textsubscript{0}--A\textsubscript{d})/A\textsubscript{0} $\times$ 100
+    \item \KEY{Extrusion:} Pushing through shaped die (ductile metals e.g., Cu, Al -- hot)
+    \item \KEY{Drawing:} Pulling through shaped die (wire, rod, tubing -- cold)
+\end{itemize}
+
+\mysubsec{4.2 Casting Methods}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{Sand Casting:} Low cost, large/complex parts; \textit{poor surface finish, lower accuracy}
+    \item \CRIT{Investment (Lost Wax):} High precision, complex shapes, excellent surface; \textit{higher cost, smaller parts}
+    \item \CRIT{Die Casting:} High production rate, good accuracy; \textit{only low-T\textsubscript{m} metals, high tooling cost}
+    \item \textbf{Continuous Casting:} Simple shapes (slabs, billets); continuous process
+\end{itemize}
+
+\mysubsec{4.3 Heat Treatment Types}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Full Annealing:} Heat to $\gamma$ $\to$ \textit{furnace cool slowly} $\to$ coarse pearlite $\to$ \textbf{soft, machinable}
+    \item \KEY{Normalising:} Heat above A\textsubscript{3} $\to$ \textit{air cool} $\to$ fine pearlite $\to$ refined grains
+    \item \CRIT{Quenching:} Heat above A\textsubscript{3} $\to$ \textit{rapid cool} $\to$ \textbf{MARTENSITE (hard, brittle)}
+    \item \CRIT{Tempering:} Reheat quenched martensite $\to$ \textbf{TEMPERED MARTENSITE (strength + toughness)}
+    \item \KEY{Spheroidising:} Just below 727\textdegree C, 15--25 h $\to$ cementite spheres $\to$ very soft for machining
+\end{itemize}
+
+\mysubsec{4.4 Four Strengthening Mechanisms}
+\begin{enumerate}[leftmargin=*,nosep]
+    \item \KEY{Grain Size Reduction (Hall-Petch):} $\sigma_y = \sigma_0 + k_y d^{-1/2}$; \CRIT{smaller grains = more GB barriers = higher strength}
+    \item \KEY{Solid Solution Strengthening:} Impurity strain fields interact with dislocations; $\sigma_y \propto C^{1/2}$
+    \item \KEY{Strain Hardening (Cold Work):} Dislocation density $\uparrow$ from $\sim$10\textsuperscript{5} to $\sim$10\textsuperscript{10} mm\textsuperscript{--2} $\to$ entanglements
+    \item \KEY{Precipitation Hardening:} Solution treat $\to$ quench (supersaturated) $\to$ age (fine precipitates impede dislocations). \EXA{Al--Cu (2024), Cu--Be}
+\end{enumerate}
+
+\newpage
+% ============================================================
+\mysec{5. Polymers -- T\textsubscript{m} vs.\ T\textsubscript{g} and Stress--Strain Types}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- T\textsubscript{m} vs.\ T\textsubscript{g}: Critical Distinction}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \HI{T\textsubscript{m} (Melting Temperature):} Ordered solid $\to$ disordered liquid; \CRIT{a PHASE CHANGE}. Polymers melt over a RANGE of temperatures (unlike metals/ceramics).
+    \item \HI{T\textsubscript{g} (Glass Transition Temperature):} Rigid/glassy $\to$ rubbery/flexible; \CRIT{NOT melting!} A change in CHAIN MOBILITY only. When enough \textbf{free volume} exists for chain segments to rotate.
+    \item \textbf{At T\textsubscript{g}:} Elastic modulus drops $\sim$1000$\times$; step change in heat capacity; CTE increases.
+    \item \HI{Empirical rule:} T\textsubscript{g} $\approx$ 0.5--0.8 T\textsubscript{m} (in Kelvin) for homopolymers.
+    \item \textbf{No T\textsubscript{g}} for highly crystalline or highly cross-linked polymers (chains immobile).
+\end{itemize}
+\end{critbox}
+
+\begin{impbox}{Factors that INCREASE both T\textsubscript{g} and T\textsubscript{m}}
+\begin{enumerate}[leftmargin=*,nosep]
+    \item Bulky side groups (e.g., PS: T\textsubscript{g}=100\textdegree C vs.\ PP: T\textsubscript{g}=--18\textdegree C)
+    \item Polar groups (stronger intermolecular forces, e.g., PVC: T\textsubscript{g}=87\textdegree C)
+    \item Chain double bonds and aromatic groups (stiffer backbone, e.g., PC: T\textsubscript{g}=150\textdegree C)
+    \item Higher molecular weight (up to a limiting value)
+    \item \CRIT{More branching $\to$ more free volume $\to$ LOWER T\textsubscript{g}}
+\end{enumerate}
+\end{impbox}
+
+\mysubsec{5.1 Three Polymer Stress--Strain Types}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- Must Sketch and Explain All Three Curves}
+\begin{enumerate}[leftmargin=*,nosep]
+    \item \CRIT{BRITTLE POLYMER:} Low strain to failure; little or no plastic deformation; sudden fracture. Chains immobilised (below T\textsubscript{g}) or heavily cross-linked. \EXA{PS at RT, PMMA below T\textsubscript{g}, highly cross-linked epoxies.}
+    \item \CRIT{PLASTIC POLYMER:} Yield point + necking/cold drawing; lamellae slide, chains and crystallites align with tensile axis; fibrillar structure; $>$1000\% elongation possible. \EXA{Semi-crystalline PE, PP, Nylon above T\textsubscript{g}.}
+    \item \CRIT{ELASTOMER:} Very large elastic strain (several hundred \%); fully recoverable upon unloading; cross-linked to prevent permanent flow; kinked chains uncoil under stress, recoil when released. \EXA{Natural rubber, SBR, silicone, polyurethane elastomers.}
+\end{enumerate}
+\end{critbox}
+
+\mysubsec{5.2 Viscoelasticity}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Viscoelasticity:} Material exhibits BOTH viscous (time-dependent, irreversible) and elastic (time-independent, reversible) characteristics during deformation
+    \item \FML{Stress Relaxation: $E_r(t) = \sigma(t)/\varepsilon_0$} -- stress decays under constant strain
+    \item \FML{WLF Shift Factor: $\log(a_T) = -C_1(T-T_0)/(C_2+T-T_0)$; $C_1$=17.5 K, $C_2$=52 K}
+    \item \textbf{Master Curve:} Shift modulus--time curves at different T to a reference T
+    \item At T $>$ 1.3 T\textsubscript{g}: polymers flow; $\eta = \tau/\dot{\gamma}$; typically moulded at $\eta$ = 10\textsuperscript{3}--10\textsuperscript{5} Pa·s
+\end{itemize}
+
+\mysubsec{5.3 Polymer Classification}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{THERMOPLASTICS:} Held together by secondary bonds; \CRIT{soften on heating, harden on cooling -- REVERSIBLE}; can be recycled. \EXA{PE, PP, PS, PVC, Nylon (PA66), PMMA, PET.}
+    \item \CRIT{THERMOSETS:} Held together by primary cross-link bonds; \CRIT{harden PERMANENTLY on heating -- NOT recyclable by melting}; decompose on further heating. \EXA{Epoxy, Polyurethane, Phenolic resins, vulcanised rubber.}
+\end{itemize}
+
+\mysubsec{5.4 Polymer Processing}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Plasticizer:} Low-M\textsubscript{w} molecules creating free volume between chains $\to$ \CRIT{REDUCE T\textsubscript{g}}. Must be miscible, low volatility. \EXA{PVC + plasticiser = flexible at room temperature.}
+    \item \textbf{Compression Moulding:} T $>$ T\textsubscript{g}, not above T\textsubscript{m}; relatively slow ($>$10 s)
+    \item \textbf{Injection Moulding:} T $>$ T\textsubscript{m}; very fast ($<$10 s); most common for thermoplastics
+    \item \textbf{Blow Moulding:} T $>$ T\textsubscript{g}, not above T\textsubscript{m}; molecular alignment; all plastic bottles
+    \item \textbf{Extrusion:} Continuous process; pipes, rods, sheets, profiles, filaments
+    \item \textbf{3D Printing:} FDM (thermoplastics), SLS (powder), SLA (UV-cured thermosets)
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{6. Ceramics -- Fracture Mechanics}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- Ceramic Strength is FLAW-CONTROLLED}
+\Large\centering
+$\displaystyle \sigma_{fs} = \frac{K_c}{Y\sqrt{\pi a}}$ \hspace{1.5cm} \CRIT{LARGER FLAWS = LOWER STRENGTH}
+
+\vspace{6pt}
+\normalsize\raggedright
+\begin{itemize}[leftmargin=*,nosep]
+    \item K\textsubscript{c} for ceramics: typically 0.5--12 MPa$\sqrt{\text{m}}$ \hspace{0.5cm} (cf.\ metals: 50--200 MPa$\sqrt{\text{m}}$)
+    \item \CRIT{Compressive strength $\gg$ tensile strength} (catastrophic brittle failure from flaws in tension)
+    \item Strength is STATISTICAL (skewed distribution) -- depends on flaw population in each specimen
+    \item Testing: 3-point/4-point flexural bend preferred (no gripping problem; displacement maximised)
+    \item Fractography: Hackle $\to$ Mist $\to$ Mirror $\to$ Origin; intergranular fracture common
+    \item Porosity effects: $E = E_0(1-1.9P+0.9P^2)$; $\sigma_{fs} = \sigma_0\exp(-nP)$
+\end{itemize}
+\end{critbox}
+
+\mysubsec{6.1 Key Engineering Ceramics}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Al\textsubscript{2}O\textsubscript{3} (Alumina):} E=380 GPa; $\sigma_{comp}$=3000 MPa; K\textsubscript{c}=3--5 MPa$\sqrt{\text{m}}$; chemically inert; furnace parts
+    \item \KEY{SiC (Silicon Carbide):} E=410 GPa; excellent high-T strength; $k$=84 W/m·K
+    \item \KEY{Si\textsubscript{3}N\textsubscript{4} (Silicon Nitride):} E=310 GPa; K\textsubscript{c}=4 MPa$\sqrt{\text{m}}$; needle-shaped $\beta$ crystals $\to$ higher toughness
+    \item \KEY{ZrO\textsubscript{2} (Zirconia):} K\textsubscript{c}=4--12 MPa$\sqrt{\text{m}}$ (best toughness); PSZ via CaO/Y\textsubscript{2}O\textsubscript{3} doping
+    \item \KEY{BaTiO\textsubscript{3}:} Ferroelectric; cubic above T\textsubscript{c}=120\textdegree C, tetragonal below; k=2000--10,000
+    \item \KEY{PZT (Lead Zirconate Titanate):} Piezoelectric; perovskite structure; sensors, actuators
+\end{itemize}
+
+\mysubsec{6.2 Ceramic Processing}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Sintering:} Powder compacted $\to$ heated to $\sim$0.8T\textsubscript{m} $\to$ surface diffusion joins particles; material flows from high to low curvature
+    \item \KEY{Glass Tempering:} Surface in compression $\to$ suppresses crack growth from scratches (safety glass, car windows)
+    \item \KEY{Cementation:} Cement + water $\to$ hydration reactions; 50\% strength in 7 days, 100\% in 28 days
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{7. Electrical Properties -- Band Structures and Semiconductors}
+
+\mysubsec{7.1 Energy Band Structures}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- Must Draw and Explain All Four Types!}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{p{2.3cm} p{5.5cm} p{2.4cm} p{3.2cm}}
+\toprule
+\textbf{Type} & \textbf{Band Structure} & \textbf{E\textsubscript{gap}} & \textbf{Examples} \\
+\midrule
+\CRIT{Metal (Cu type)}  & \textbf{Partially filled} valence band; electrons easily move to adjacent empty states within same band & None (within band) & Cu, Ag, Au, Al \\
+\CRIT{Metal (Mg type)}  & Empty conduction band \textbf{OVERLAPS} filled valence band & None (overlap) & Mg, Be \\
+\CRIT{Insulator}   & \textbf{Wide band gap} $>$2 eV; very few electrons thermally excited across gap & Large ($>$2 eV) & Diamond (5.5 eV), Al\textsubscript{2}O\textsubscript{3} \\
+\CRIT{Semiconductor}& \textbf{Narrow band gap} $<$2 eV; some electrons thermally excited at room T & Small ($<$2 eV) & Si (1.11), Ge (0.67), GaAs (1.42) \\
+\bottomrule
+\end{tabular}
+\end{critbox}
+
+\mysubsec{7.2 Semiconductors}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Intrinsic:} Pure material; $n = p = n_i$; $\sigma = n_i|e|(\mu_e+\mu_h)$; \CRIT{conductivity INCREASES with T} ($n_i \propto \exp(-E_g/2kT)$; opposite to metals!)
+    \item \KEY{n-type (Extrinsic):} Dope Group VA (P, As) into Si $\to$ \CRIT{excess electrons}; majority = electrons, minority = holes; $\sigma \approx n|e|\mu_e$
+    \item \KEY{p-type (Extrinsic):} Dope Group IIIA (B) into Si $\to$ \CRIT{excess holes}; majority = holes, minority = electrons; $\sigma \approx p|e|\mu_h$
+    \item \HI{Two charge carriers: Electrons (negative, in conduction band) + Holes (positive, in valence band)}
+    \item \textbf{Extrinsic conductivity regimes:} Freeze-out ($<$100 K) $\to$ Extrinsic (150--450 K, constant) $\to$ Intrinsic ($>$450 K)
+\end{itemize}
+
+\mysubsec{7.3 p--n Rectifying Junction}
+\begin{critbox}{EXAM PRIORITY 5/5 -- Current Flows in ONE Direction Only}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \textbf{No bias:} Depletion region forms at junction; no net current flow
+    \item \CRIT{Forward bias (+ to p, $-$ to n):} Carriers flow through both regions; holes and electrons recombine at junction $\to$ \textbf{CURRENT FLOWS}
+    \item \CRIT{Reverse bias ($-$ to p, + to n):} Carriers pulled away from junction; depletion region widens $\to$ \textbf{VERY LITTLE CURRENT}
+    \item \HI{Result: Allows current in ONE direction only $\to$ AC $\to$ DC conversion (rectification)}
+    \item \EXA{Applications:} Diodes, photodiodes, LEDs, photovoltaic solar cells
+\end{itemize}
+\end{critbox}
+
+\mysubsec{7.4 Dielectric Properties}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Dielectric material:} An insulator that can \CRIT{transmit an electric field without conduction}; some can be polarised
+    \item \FML{Capacitance: $C = Q/V = \varepsilon_0\varepsilon_r A/l$}; \HI{$\varepsilon_0 = 8.85\times10^{-12}$ F/m}
+    \item \FML{Dielectric Constant: $\varepsilon_r = \varepsilon/\varepsilon_0 = k$} [dimensionless]
+    \item \CRIT{\textbf{Dielectric Strength:} Maximum E-field before electrical breakdown [V/m or MV/m]; \HI{larger band gap $\to$ greater dielectric strength}}
+    \item \textbf{3 Polarisation types:} Electronic (fastest, up to UV) $\to$ Ionic (mid, up to IR) $\to$ Orientation (slowest, up to microwave). \EXA{BaTiO\textsubscript{3}: k=2000--10,000}
+    \item \KEY{Ferroelectric:} Spontaneous polarisation below Curie T\textsubscript{c}. \KEY{Piezoelectric:} Strain $\leftrightarrow$ voltage conversion. \EXA{PZT -- sensors, actuators, resonators}
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{8. Thermal Properties}
+
+\begin{formbox}{Key Thermal Equations}
+\Large\centering
+$C = \frac{dQ}{dT}\;[\mathrm{J/mol\!\cdot\!K}]$ \hspace{0.5cm}
+$c = \frac{dQ}{m\,dT}\;[\mathrm{J/kg\!\cdot\!K}]$ \hspace{0.5cm}
+$q = -k\frac{dT}{dx}\;[\mathrm{W/m^2}]$
+
+\vspace{4pt}
+$a = \frac{k}{\rho c_p}\;[\mathrm{m^2/s}]$ \hspace{0.5cm}
+$\alpha_l = \frac{\Delta l}{l_0\Delta T}\;[\mathrm{1/K}]$ \hspace{0.5cm}
+$TSR \propto \frac{k\cdot\sigma_f}{E\cdot\alpha_l}$
+\end{formbox}
+
+\mysubsec{8.1 Thermal Conductivity Mechanisms}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{Metals $\to$ FREE ELECTRONS dominate} ($k \propto \sigma$, Wiedemann-Franz Law). \EXA{Al=247, Cu$\sim$400, Steel=52 W/m·K.}
+    \item \CRIT{Ceramics $\to$ PHONON transport dominates} (few free electrons; phonons easily scattered; amorphous = even lower $k$). \EXA{MgO=38, Al\textsubscript{2}O\textsubscript{3}=39, Soda-lime glass=1.7 W/m·K.}
+    \item \CRIT{Polymers $\to$ MOLECULAR VIBRATION/ROTATION} (very low $k$ $\to$ good thermal insulators). \EXA{PP=0.12, PE=0.46--0.50, PS=0.13, Aerogels$\sim$0.01 W/m·K.}
+\end{itemize}
+
+\mysubsec{8.2 Thermal Expansion}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \textbf{Atomic origin:} Asymmetric potential energy vs.\ interatomic separation curve; increase T $\to$ increase average separation $\to$ expansion
+    \item \CRIT{Weaker bonds $\to$ more asymmetric curve $\to$ larger CTE}
+    \item Polymers: CTE = 90--216$\times$10\textsuperscript{--6}/K (largest -- weak secondary bonds)
+    \item Metals: 4.5--23.6; Ceramics: 0.4--13.5 (all $\times$10\textsuperscript{--6}/K)
+\end{itemize}
+
+\mysubsec{8.3 Thermal Shock}
+\begin{itemize}[leftmargin=*,nosep]
+    \item Rapid cooling $\to$ surface contracts, interior resists $\to$ \CRIT{TENSILE STRESS at surface $\to$ cracks}
+    \item \FML{$TSR \propto k\sigma_f/(E\alpha_l)$}; for pre-cracked materials: $\propto k K_{IC}/(E\alpha_l)$
+    \item Low $k$ + high $E$ + high $\alpha_l$ = \CRIT{POOR thermal shock resistance}
+    \item \EXA{Examples:} Metal quenching (max cooling rate), ceramic cooling (fracture to frit), welding low-$k$ steels
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{9. Magnetic Properties}
+
+\mysubsec{9.1 Five Types of Magnetism}
+
+\begin{critbox}{EXAM PRIORITY 5/5 -- Must Distinguish All Five Types}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{2.3cm} c p{5.5cm} p{3.0cm}}
+\toprule
+\textbf{Type} & \textbf{$\chi_m$} & \textbf{Behaviour} & \textbf{Examples} \\
+\midrule
+\CRIT{Diamagnetism}   & $\sim-10^{-5}$ & \CRIT{Weak, OPPOSES field; non-permanent; only under external H} & Al\textsubscript{2}O\textsubscript{3}, Cu, Au, Si, Ag \\
+\CRIT{Paramagnetism}   & $\sim10^{-4}$  & \CRIT{Weak ATTRACTION; random moments align under H; disappears when H removed} & Al, Cr, Mo, Na, Ti \\
+\CRIT{Ferromagnetism}  & up to $\sim10^6$ & \CRIT{Strong, PERMANENT possible; domains; above T\textsubscript{c} $\to$ paramagnetic} & $\alpha$-Fe (T\textsubscript{c}=768\textdegree C), Co, Ni \\
+\CRIT{Ferrimagnetism}  & up to $\sim10^6$ & \CRIT{Antiparallel UNEQUAL moments $\to$ NET magnetisation} & Fe\textsubscript{3}O\textsubscript{4}, NiFe\textsubscript{2}O\textsubscript{4} \\
+\CRIT{Antiferromag.}   & -- & \CRIT{Antiparallel EQUAL moments $\to$ NO net magnetisation} & MnO \\
+\bottomrule
+\end{tabular}
+
+\vspace{6pt}
+\begin{notebox}{Note}
+\textbf{Diamagnetic and paramagnetic} materials are considered \CRIT{NON-MAGNETIC} -- they only show magnetisation under an external applied field.
+\end{notebox}
+\end{critbox}
+
+\mysubsec{9.2 Hysteresis Loop}
+\begin{impbox}{Must Sketch and Label B vs.\ H Hysteresis Loop}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \textbf{Saturation ($B_{sat}$):} All domains aligned with applied field
+    \item \KEY{Remanence ($B_r$):} Magnetisation remaining after H removed $\to$ \CRIT{permanent magnet}
+    \item \KEY{Coercivity ($H_c$):} Reverse field needed to demagnetise (return B to zero)
+\end{itemize}
+\vspace{4pt}
+\CRIT{SOFT magnets} (small $H_c$, narrow loop, low hysteresis loss): Transformers, motors, electromagnets -- easy to magnetise and demagnetise.\\[2pt]
+\CRIT{HARD magnets} (large $H_c$, wide loop, high energy product): Permanent magnets, magnetic storage, loudspeakers, earphones.
+\end{impbox}
+
+\mysubsec{9.3 Key Magnetic Equations}
+\begin{formbox}{}
+\Large\centering
+$H = \frac{NI}{l}\;[\mathrm{A/m}]$ \hspace{0.4cm} $B_0 = \mu_0 H$ \hspace{0.4cm} $\mu_0 = 1.257\times10^{-6}\;\mathrm{H/m}$ \hspace{0.4cm}
+$B = \mu H = \mu_0\mu_r H$
+
+\vspace{3pt}
+$\chi_m = \mu_r - 1$ \hspace{0.5cm} $M = \chi_m H$ \hspace{0.5cm} $B = \mu_0 H + \mu_0 M = \mu_0(1+\chi_m)H$ \hspace{0.5cm} $\mu_B = 9.274\times10^{-24}\;\mathrm{J/T}$
+\end{formbox}
+
+\newpage
+% ============================================================
+\mysec{10. Optical Properties}
+
+\mysubsec{10.1 Fluorescence vs.\ Phosphorescence}
+\begin{impbox}{EXAM PRIORITY 4/5}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{Fluorescence:} \CRIT{Short residence time in trapped state ($<10^{-8}$ s)} $\to$ prompt re-emission of lower-energy light
+    \item \KEY{Phosphorescence:} \CRIT{Long residence time ($>10^{-8}$ s)} $\to$ delayed re-emission (glow-in-the-dark materials)
+    \item \textbf{Mechanism:} Material absorbs high-energy photon $\to$ electron excited to conduction band $\to$ trapped at impurity/defect level within band gap $\to$ decays to valence band $\to$ emits lower-energy photon
+\end{itemize}
+\end{impbox}
+
+\mysubsec{10.2 Total Internal Reflection}
+\begin{critbox}{EXAM PRIORITY 4/5 -- Optical Fibre Principle}
+\begin{itemize}[leftmargin=*,nosep]
+    \item Occurs when light travels from \CRIT{higher $n_1$ to lower $n_2$ ($n_2 < n_1$)}
+    \item \FML{Critical angle: $\sin\phi_c = n_2/n_1$} (defined when refracted angle $\phi_2 = 90^\circ$)
+    \item For incident angle $\phi_1 > \phi_c$: Light is \CRIT{COMPLETELY REFLECTED internally -- NO transmission}
+    \item \HI{\textbf{Application: OPTICAL FIBRES}} -- core (high-purity silica glass, $n_1$) + cladding (lower $n_2$, typically plastic); fibre diameter $\sim$125 $\mu$m
+    \item One single optical fibre can carry $\sim$250 million phone conversations per second (would require 30 tonnes of copper wire for equivalent transmission!)
+\end{itemize}
+\end{critbox}
+
+\mysubsec{10.3 Absorption by Band Gap}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{$E_{gap} < 1.8$ eV:} ALL visible light absorbed $\to$ \textbf{OPAQUE}. \EXA{Si, GaAs.}
+    \item \CRIT{$E_{gap} > 3.1$ eV:} NO visible absorbed $\to$ \textbf{TRANSPARENT, COLOURLESS}. \EXA{Diamond.}
+    \item \CRIT{$1.8 < E_{gap} < 3.1$ eV:} PARTIAL absorption $\to$ \textbf{COLOURED}. \EXA{CdS (E$_g$=2.4 eV): absorbs blue/violet $\to$ appears orange/yellow.}
+\end{itemize}
+
+\mysubsec{10.4 Key Optical Technologies}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \KEY{LED (Light Emitting Diode):} p--n junction in forward bias $\to$ electron-hole recombination across band gap $\to$ photon emission; colour (wavelength) depends on $E_{gap}$. Blue LED (GaN) won Nobel Prize in Physics 2014.
+    \item \KEY{PV Solar Panels:} p--n junction; incident photon creates electron-hole pair $\to$ $\sim$0.5 V across junction; band gap engineering enables full-spectrum absorption.
+    \item \KEY{LASER:} Light Amplification by Stimulated Emission of Radiation; requires \textbf{population inversion} (more electrons in excited state than ground state); stimulated emission produces coherent, parallel, in-phase light waves.
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{11. Sustainable Engineering}
+
+\mysubsec{11.1 Three Pillars of Sustainability}
+\begin{center}
+\begin{tcolorbox}[
+  enhanced,
+  sharp corners,
+  boxrule=1pt,
+  colback=DarkOrange!3!white,
+  colframe=DarkOrange!60,
+  width=0.92\linewidth,
+  before skip=8pt, after skip=8pt,
+]
+  \centering\large\bfseries
+  SOCIAL \hspace{2cm} ECONOMIC \hspace{2cm} ENVIRONMENTAL\\[4pt]
+  \normalsize Acceptable \hspace{1.8cm} Marketable \hspace{1.8cm} Viable
+\end{tcolorbox}
+\end{center}
+
+\mysubsec{11.2 Life Cycle Analysis (LCA) -- ISO 14040 (2006)}
+\begin{enumerate}[leftmargin=*,nosep]
+    \item \KEY{Goal and Scope Definition}
+    \item \KEY{Life Cycle Inventory (LCI):} Quantify energy, water, materials inputs and environmental releases
+    \item \KEY{Life Cycle Impact Assessment (LCIA):} Evaluate potential environmental and human health impacts
+    \item \KEY{Interpretation:} Analyse results to inform decisions
+\end{enumerate}
+\textbf{Key metrics:} \KEY{Embodied Energy ($H_m$)} = energy to create 1 kg usable material [MJ/kg]; \KEY{CO\textsubscript{2} Footprint} [kg/kg]; \KEY{Processing Energy ($H_p$)} = energy to shape, join, and finish 1 kg [MJ/kg].
+
+\mysubsec{11.3 The 3 R's of Green Design}
+\begin{itemize}[leftmargin=*,nosep]
+    \item \CRIT{REDUCE:} Redesign product to use less material (e.g., PET bottles with thinner walls)
+    \item \CRIT{REUSE:} Fabricate product from reusable material (e.g., refillable bottles, shipping containers)
+    \item \CRIT{RECYCLE:} Reprocess material into new product (e.g., PET bottles $\to$ carpet fibres; ground tyres $\to$ soft surfaces). \HI{Al recycling saves $\sim$95\% energy vs.\ primary production!}
+\end{itemize}
+
+\mysubsec{11.4 Design for Environment (DfE)}
+\begin{impbox}{Four Simple DfE Rules}
+\begin{enumerate}[leftmargin=*,nosep]
+    \item \CRIT{Recyclable with NO loss in performance} (technical cycle)
+    \item \CRIT{Natural materials $\to$ fully biodegradable} (biological cycle)
+    \item \CRIT{NO unnatural, toxic materials} that are difficult to dispose of safely
+    \item \CRIT{Clean, RENEWABLE energy sources} rather than fossil fuels
+\end{enumerate}
+\end{impbox}
+
+\begin{itemize}[leftmargin=*,nosep]
+    \item \textbf{Cradle-to-Grave:} Linear model -- extract $\to$ manufacture $\to$ use $\to$ dispose (landfill)
+    \item \textbf{Cradle-to-Cradle:} Circular model -- design for continuous recycling/reuse with NO loss in performance
+    \item \CRIT{E-Waste:} Fastest growing waste stream globally; $\sim$53 million tonnes/year (equivalent to 350 cruise ships); only 15--20\% recycled; contains toxic and rare elements
+    \item ``Right to Repair'' laws (UK, USA): Electronic devices must be repairable with spare parts available
+\end{itemize}
+
+\newpage
+% ============================================================
+\mysec{12. Must-Memorize Numbers \& Constants}
+
+\begin{membox}{CRITICAL NUMBERS FOR THE EXAMINATION}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{>{\bfseries}l l}
+\toprule
+\multicolumn{2}{c}{\textbf{Fe--C Phase Diagram}} \\
+Fe--C Eutectoid (T, composition)          & \HI{727\textdegree C, 0.76 wt\% C} \\
+Fe--C Eutectic (T, composition)           & \HI{1148\textdegree C, 4.30 wt\% C} \\
+\midrule
+\multicolumn{2}{c}{\textbf{Curie Temperatures}} \\
+BaTiO\textsubscript{3} Curie T\textsubscript{c} (ferroelectric) & 120\textdegree C \\
+Fe Curie T\textsubscript{c} (ferromagnetic)                     & 768\textdegree C \\
+\midrule
+\multicolumn{2}{c}{\textbf{Melting Temperatures}} \\
+Aluminium T\textsubscript{m}     & 660\textdegree C \\
+Titanium T\textsubscript{m}      & 1668\textdegree C \\
+Tungsten T\textsubscript{m} (highest pure metal) & 3410\textdegree C \\
+\midrule
+\multicolumn{2}{c}{\textbf{Fundamental Constants}} \\
+$\varepsilon_0$ (vacuum permittivity) & $8.85\times10^{-12}$ F/m \\
+$\mu_0$ (vacuum permeability)         & $1.257\times10^{-6}$ H/m \\
+$\mu_B$ (Bohr magneton)               & $9.274\times10^{-24}$ J/T \\
+$h$ (Planck's constant)               & $6.626\times10^{-34}$ m\textsuperscript{2}kg/s \\
+$c$ (speed of light)                  & $2.99\times10^8$ m/s \\
+R (gas constant)                      & 8.31 J/mol·K \\
+\bottomrule
+\end{tabular}
+\end{membox}
+
+\vspace{10pt}
+\mysec{13. Exam Priority Quick List}
+
+\begin{critbox}{5/5 -- ABSOLUTE HIGHEST PRIORITY (10 Topics)}
+\begin{enumerate}[leftmargin=*,nosep]
+    \item \HI{Fe--C Phase Diagram} -- Sketch + label + interpret all phase regions
+    \item \HI{Eutectic vs.\ Eutectoid} -- Definitions, equations, differences, applications
+    \item \HI{Carbon Content vs.\ Steel Properties} -- Explain WHY higher C changes properties
+    \item \HI{Cold Working vs.\ Hot Working} -- $T_{rec}$ is the ONLY criterion
+    \item \HI{T\textsubscript{m} vs.\ T\textsubscript{g}} -- Definition, factors affecting each, processing significance
+    \item \HI{Polymer Stress--Strain (3 types)} -- Sketch curves + explain molecular mechanisms
+    \item \HI{Energy Band Structures (4 types)} -- Draw + relate to conductivity
+    \item \HI{Charge Carriers + Doping} -- n-type vs.\ p-type; electrons vs.\ holes
+    \item \HI{p--n Junction} -- Forward/reverse bias, depletion region, rectification
+    \item \HI{Dielectric Strength} -- Definition, significance, relation to band gap
+\end{enumerate}
+\end{critbox}
+
+\begin{impbox}{4/5 -- HIGH PRIORITY (5 Topics)}
+\begin{enumerate}[leftmargin=*,start=11,nosep]
+    \item Casting Methods -- Sand, die, investment, continuous; pros/cons
+    \item Five Magnetic Types -- Distinguish by $\chi_m$ value and behaviour
+    \item Fluorescence vs.\ Phosphorescence -- Residence time distinction
+    \item Total Internal Reflection -- Critical angle condition, optical fibre application
+    \item Sustainable Engineering -- LCA, 3 R's, Cradle-to-Cradle, DfE principles
+\end{enumerate}
+\end{impbox}
+
+\begin{keybox}{3/5 -- IMPORTANT (5 Topics)}
+\begin{enumerate}[leftmargin=*,start=16,nosep]
+    \item Four Strengthening Mechanisms
+    \item Thermal Conductivity Mechanisms (metals/ceramics/polymers)
+    \item Thermal Shock -- Mechanism and TSR formula (proportionality)
+    \item Viscoelasticity -- Stress relaxation, time-temperature superposition
+    \item Ceramic Fracture -- Flaw-controlled strength, statistical distribution
+\end{enumerate}
+\end{keybox}
+
+\vspace{12pt}
+
+% ---- CLOSING BANNER ----
+\vfill
+\begin{center}
+  \rule{0.6\textwidth}{0.4pt}\\[1em]
+  {\Large\bfseries\color{PrimaryDark} Good Luck with Your Examination!}\\[0.5em]
+  {\footnotesize\color{DarkGray} Compiled from ALL 30+ PPT files (Weeks 1--12). Callister \& Rethwisch, 9th Edition.}
+\end{center}
+
+\end{document}
